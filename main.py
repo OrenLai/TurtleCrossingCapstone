@@ -1,7 +1,8 @@
 from turtle import Screen
 import time
 from player import Player
-from car_manager import Car_Manager
+from car_manager import CarManager
+from scoreboard import Scoreboard
 
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -13,16 +14,10 @@ game_on = True
 # TODO : create the turtle player could control , and only be able to move up when player press Up key
 player = Player()
 # TODO : randomly generate cars from the right hand side of the screen and let it move toward left
-car_manager = Car_Manager()
+car_manager = CarManager()
+# TODO : create scoreboard , shows final score when game over
+scoreboard = Scoreboard()
 
-
-def game_over():
-    global game_on
-    game_on = False
-    print("Game over")
-
-
-screen.onkey(game_over, "s")
 screen.onkey(player.move_up, "Up")
 
 while game_on:
@@ -35,16 +30,14 @@ while game_on:
     for car in car_manager.cars:
         if car.distance(player) < 20:
             game_on = False
+            scoreboard.game_over()
 
-# TODO : if the turtle arrive the top of the screen, send it back to the start point and level up , increase car speed
+# TODO : turtle arrive finish line, send it back to the start point and level up , increase car speed ,update level
     if player.ycor() > 280:
         player.reset_position()
         car_manager.level_up()
+        scoreboard.level_up()
+        scoreboard.update_level()
 
 
 screen.exitonclick()
-
-
-
-
-# TODO : create scoreboard , that shows the score

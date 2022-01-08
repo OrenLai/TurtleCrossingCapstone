@@ -5,10 +5,12 @@ colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
 INITIAL_STEPS = 5
 SPEED_INCREMENT = 10
 
-class Car_Manager(Turtle):
+
+class CarManager(Turtle):
     def __init__(self):
         super().__init__()
         self.cars = []
+        self.hideturtle()
         self.speed = INITIAL_STEPS
         self.level = 0
 
@@ -31,4 +33,3 @@ class Car_Manager(Turtle):
     def level_up(self):
         self.speed += SPEED_INCREMENT
         self.level += 1
-
