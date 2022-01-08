@@ -3,11 +3,14 @@ from turtle import Turtle
 
 colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
 INITIAL_STEPS = 5
+SPEED_INCREMENT = 10
 
-class Cars(Turtle):
+class Car_Manager(Turtle):
     def __init__(self):
         super().__init__()
         self.cars = []
+        self.speed = INITIAL_STEPS
+        self.level = 0
 
     def create_car(self):
         flag = random.randint(1, 6)
@@ -23,6 +26,9 @@ class Cars(Turtle):
 
     def move_cars(self):
         for car in self.cars:
-            car.backward(INITIAL_STEPS)
+            car.backward(self.speed)
 
+    def level_up(self):
+        self.speed += SPEED_INCREMENT
+        self.level += 1
 
